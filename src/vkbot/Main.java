@@ -22,11 +22,11 @@ public class Main {
     }
 
     private static GroupActor initVkApi(VkApiClient apiClient, Properties properties) {
+        String token = properties.getProperty("token");
         int groupId = Integer.parseInt(properties.getProperty("groupId"));
         if (groupId == 0 || token == null) throw new RuntimeException("Params are not set");
         GroupActor actor = new GroupActor(groupId, token);
 
-        String token = properties.getProperty("token");
         apiClient.groups().getLongPollServer(actor);
 
         return actor;
@@ -44,6 +44,7 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
 }
